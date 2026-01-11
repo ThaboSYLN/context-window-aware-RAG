@@ -1,0 +1,16 @@
+Retrieval-Augmented Generation (RAG)
+
+RAG is a technique that combines information retrieval with language generation. Instead of relying solely on knowledge encoded in model weights, RAG systems retrieve relevant information from external knowledge sources before generating responses.
+
+The RAG process:
+1. User submits a query
+2. System converts query to vector embedding
+3. Retrieval system finds similar documents using vector search
+4. Retrieved documents are added to the language model's context
+5. Model generates response using both its training and retrieved information
+
+Benefits of RAG:
+- Access to up-to-date information
+- Reduced hallucinations
+- Ability to cite sources
+- Smaller models can perform better with good retrieval

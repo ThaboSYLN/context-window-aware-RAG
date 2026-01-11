@@ -1,0 +1,14 @@
+Vector Databases and Embeddings
+
+Vector databases are specialized databases designed to store and query high-dimensional vectors efficiently. They are essential for semantic search and RAG systems.
+
+Embeddings are numerical representations of data (text, images, audio) in vector space. Similar items have similar vector representations, measured by distance metrics like cosine similarity or Euclidean distance.
+
+Popular vector databases:
+- Pinecone (cloud-based)
+- ChromaDB (embedded)
+- Weaviate (open-source)
+- Milvus (scalable)
+- FAISS (Facebook's library)
+
+Vector search (also called semantic search) finds items based on meaning rather than

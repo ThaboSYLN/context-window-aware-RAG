@@ -1,5 +1,8 @@
 .env
-\ContextRAG
+ContextRAG/
 testingLLM.py
 currentsetTest.py
 currentsetTest_2.py
+currentsetTest_3.py
+test_embedding.py
+
