@@ -1,13 +1,13 @@
 # Context-Window-Aware RAG System
 
-> A production-grade Retrieval-Augmented Generation system with explicit context window management and intelligent budget enforcement
+> A Retrieval-Augmented Generation system with explicit context window management and intelligent budget enforcement as per the defined Context Structure and budget
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Key Innovation](#key-innovation)
@@ -27,7 +27,7 @@
 
 ## Overview
 
-This project implements a RAG system that **explicitly manages its context window** using strict token budgets. Unlike traditional RAG systems that indiscriminately pack context, this system demonstrates intelligent prioritization and graceful degradation when budgets are exceeded.
+This project implements a RAG system that **explicitly manages its context window** using strict token budgets. Unlike normal  RAG systems, this system demonstrates intelligent prioritization and graceful degradation when budgets are exceeded.
 
 ### The Problem
 
@@ -37,13 +37,13 @@ Most RAG systems suffer from:
 - **Poor prioritization** - treating all context equally
 - **Silent failures** - truncation happens invisibly
 
-### Our Solution
+### This RAG System guided the defined Context Structure and budget 
 
 A RAG system that:
-- ✅ **Explicitly manages** every token in the context window
-- ✅ **Enforces hard budgets** for each section
-- ✅ **Applies intelligent truncation** when limits are exceeded
-- ✅ **Reports all decisions** with full transparency
+-  **Explicitly manages** every token in the context window
+-  **Enforces hard budgets** for each section
+-  **Applies intelligent truncation** when limits are exceeded
+-  **Reports all decisions** with full transparency
 
 ---
 
@@ -72,7 +72,7 @@ Each section has:
 
 ## Architecture
 
-### High-Level Components
+### High-Level Components(AI Generated)
 ```
 ┌─────────────┐
 │    User     │
@@ -128,6 +128,7 @@ Each section has:
 | `tools/` | Tool execution tracking | `ToolManager` |
 | `llm/` | LLM integration | `GeminiClient` |
 | `utils/` | Token counting | `TokenCounter` |
+| `ScreenshotrunFlow/`|proof of flow|`...`|
 
 ---
 
@@ -154,7 +155,7 @@ Be concise but thorough in your explanations."
 **Why this budget?**
 - Core system behavior must fit comfortably
 - 255 tokens = ~1000 characters = adequate for guidelines
-- If exceeded, it's a configuration error, not a runtime issue
+- If exceeded, it's a configuration error, not a runtime issue-demonstrating good error handling :)
 
 ---
 
@@ -166,15 +167,15 @@ Be concise but thorough in your explanations."
 **Priority:** HIGH
 ```python
 # Truncation example
-Original: "I'm working on X with Y and Z using A, B, C... what is best for Z?"
-Truncated: "I'm working on X... what is best for Z?"
+Original: "I'm working on S with Y  and L using A,B,C... what is best for L?"
+Truncated: "I'm working on S... what is best for L?"
 
 # Preserves:
-✅ Context setup (what user is doing)
-✅ Actual question (what user wants)
+->Context setup (what user is doing)
+-> Actual question (what user wants)
 
 # Sacrifices:
-❌ Implementation details (can be inferred)
+X-->Implementation details (can be inferred)
 ```
 
 **Why this budget?**
@@ -211,9 +212,9 @@ Exchange 2: User: "How does it work?"
 - Older context becomes less valuable
 
 **Design Tradeoff:**
-- ✅ Keeps conversation coherent
-- ✅ Lightweight (doesn't dominate budget)
-- ❌ Can't maintain long conversation history
+-  Keeps conversation coherent
+-  Lightweight (doesn't dominate budget)
+- X--> Can't maintain long conversation history
 - **Solution:** Most important info should be in retrieval or goal
 
 ---
@@ -235,8 +236,8 @@ Retrieved chunks (sorted by relevance):
 4. doc5.txt (score: 0.42) - "Vector databases store..." [120 tokens]
 
 If budget = 550 tokens:
-✅ Keep chunks 1, 2, 3 (530 tokens total)
-❌ Drop chunk 4 (lowest relevance)
+ Keep chunks 1, 2, 3 (530 tokens total)
+X--> Drop chunk 4 (lowest relevance)
 ```
 
 **Why this budget?**
@@ -268,8 +269,8 @@ Tool outputs (sorted by success, then timestamp):
 5. web_search (SUCCESS, t=100) - "Old results..." [300 tokens]
 
 If budget = 855 tokens:
-✅ Keep outputs 1, 2, 3 (500 tokens total)
-❌ Drop outputs 4, 5 (failed + old)
+  Keep outputs 1, 2, 3 (500 tokens total)
+--> Drop outputs 4, 5 (failed + old)
 ```
 
 **Why this budget?**
@@ -283,28 +284,30 @@ If budget = 855 tokens:
 
 ### Prerequisites
 
-- Python 3.10 or higher
+- Python 3.11.9-- to make sure it the RAG run please use this version  ```PLEASE```
 - Google Gemini API key (free tier available)
 
 ### Setup Steps
 ```bash
 # 1. Clone or download the project
-cd context-window-aware-RAG
+   # -  git clone <use the URL of this repo>         on yur Terminal     
+       # example:  git clone https://gitgub.com//username//reponame.git
+cd context-window-aware-RAG  # revify
 
 # 2. Create virtual environment
-python -m venv venv
+python -m venv ContextRAG    
 
 # Windows
-venv\Scripts\activate
+ContextRAG\Scripts\activate
 
 # Mac/Linux
 source venv/bin/activate
 
 # 3. Install dependencies
-pip install -r requirements.txt
+pip install -r requirements.txt   -- might face  some version mismatch please try to make sure everything is installed by nay means
 
 # 4. Configure environment
-cp .env.example .env
+cp .env   
 # Edit .env and add your GEMINI_API_KEY
 
 # 5. Initialize vector store
@@ -316,7 +319,7 @@ python -m cli.main init
 ## Quick Start
 
 ### Basic Usage
-```bash
+```bash--terminal (I'll seggest you use poweshell)
 # Ask a question
 python -m cli.main query "How do neural networks learn?"
 
@@ -331,11 +334,11 @@ python -m cli.main demo-overflow
 ```
 
 ### Example Session
-```bash
+```bash--terminal (I'll seggest you use poweshell)
 # Initialize system
 python -m cli.main init
 
-# Ask related questions (builds conversation memory)
+# Ask related questions (builds conversation memory and check for memory storage *data\memory)
 python -m cli.main query "What is machine learning?"
 python -m cli.main query "How does it relate to neural networks?"
 python -m cli.main query "Can you summarize what we discussed?"
@@ -406,8 +409,8 @@ Output (90 tokens):
 and TensorFlow. I've tried various architectures [...] What is the 
 best approach to improve accuracy?"
 
-✅ Preserved: What user is doing + what they want
-❌ Lost: Specific implementation details (recoverable from context)
+[Yes] Preserved: What user is doing + what they want
+[No] Lost: Specific implementation details (recoverable from context)
 ```
 
 #### 3. Memory: FIFO Queue
@@ -435,5 +438,4 @@ def truncate_memory(memory_items: List[str], budget: int) -> str:
     return "\n".join(selected)
 ```
 
-**Example:**
 
