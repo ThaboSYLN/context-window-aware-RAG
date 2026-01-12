@@ -318,6 +318,11 @@ python -m cli.main init
 
 ## Quick Start
 
+## Streamlit UI usage
+``` make sure that you pip all the requirements in the the  requirements.txt file
+# Start the virtual Environment and run this command-- streamlit run app.py
+  #then the UI will oprn on your defaoult browser
+
 ### Basic Usage
 ```bash--terminal (I'll seggest you use poweshell)
 # Ask a question
